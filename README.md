@@ -1,5 +1,5 @@
 # Clone the repo
-gh repo clone github.gatech.edu/mmathew32/supervised_learning_spring_22
+git clone https://github.com/martinmathew/supervised_learning_spring_22.git
 
 # Change Directory
 cd supervised_learning_spring_22
