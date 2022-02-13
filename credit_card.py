@@ -198,25 +198,25 @@ def main(name):
     #
     # outlier(new_df_up, 'after_removing_outlier')
     # decisionTreeGridSearch(new_df)
-    decision_tree_training_sample(new_df)
-    decistiontree_pruning(new_df)
+    # decision_tree_training_sample(new_df)
+    # decistiontree_pruning(new_df)
     # decistiontree_min_leaf(new_df)
     # decisionTreeGridSearch(new_df)
     # neural_network_grid_search(new_df)
-    neural_network_size(new_df)
-    neural_network_impact_ofweights(new_df)
-    knn_with_dim_reduction(new_df)
-    knn_test(new_df)
-    knn_test_k_size(new_df)
-    ada_boost_estimators(new_df)
-    ada_boost_size(new_df)
-    svm_kernels(new_df)
-
-
-    svn_learning_curve(new_df)
-    X,y = split_data(new_df)
-    models_evaluation(X, y,5)
-
+    # neural_network_size(new_df)
+    # neural_network_impact_ofweights(new_df)
+    # knn_with_dim_reduction(new_df)
+    # knn_test(new_df)
+    # knn_test_k_size(new_df)
+    # ada_boost_estimators(new_df)
+    # ada_boost_size(new_df)
+    # svm_kernels(new_df)
+    #
+    #
+    # svn_learning_curve(new_df)
+    # X,y = split_data(new_df)
+    # models_evaluation(X, y,5)
+    confusion_matrix(new_df)
     # plt.show()
 
 from sklearn import svm, datasets
@@ -693,7 +693,7 @@ def neural_network_grid_search(new_df):
 
 
 def split_data(df):
-    # df = df.sample(frac=1)
+    df = df.sample(frac=1)
     X = df.drop('Class', axis=1)
     y = df['Class']
     return X, y
@@ -922,6 +922,25 @@ def models_evaluation(X, y, folds):
     # print(runtime_dt.head())
     # runtime_dt.plot.bar()
     plt.savefig('prediction_cc.png')
+
+
+from sklearn.metrics import plot_confusion_matrix
+def confusion_matrix(new_df):
+    f, (ax1, ax2, ax3, ax4, ax5) = plt.subplots(1, 5, figsize=(20, 6))
+    knn_model = KNeighborsClassifier(n_neighbors=5)
+    X, Y = split_data(new_df)
+    X_train, X_test, y_train, y_test = train_test_split(X, Y, random_state = 0)
+    knn_model.fit(X_train, y_train)
+    plot_confusion_matrix(knn_model, X_test, y_test)
+    plt.savefig("knn_confusion_matrix_cc.png")
+
+    boost_model = AdaBoostClassifier(
+        DecisionTreeClassifier(max_depth=2),
+        n_estimators=6,
+        learning_rate=1)
+    boost_model.fit(X_train, y_train)
+    plot_confusion_matrix(boost_model, X_test, y_test)
+    plt.savefig("ada_boost_confusion_matrix_cc.png")
 
 
 
