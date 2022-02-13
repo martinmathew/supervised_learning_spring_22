@@ -1,5 +1,5 @@
 # Clone the repo
-gh repo clone github.gatech.edu/mmathew32/supervisedlearning_spring_22
+gh repo clone github.gatech.edu/mmathew32/supervised_learning_spring_22
 
 # create env
 conda env update --prefix ./env --file environment.yml  --prune
